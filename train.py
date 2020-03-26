@@ -26,7 +26,7 @@ from GD import Generator, MS_Discriminator, Pat_Discriminator, GANLoss, weights_
 from advloss import DeepSupervision, adv_CrossEntropyLoss, adv_CrossEntropyLabelSmooth, adv_TripletLoss
 from util import data_manager
 from util.dataset_loader import ImageDataset
-from util.utils import fliplr, Logger, save_checkpoint, visualize_ranked_results, visualize_attr_results, save_heatmap
+from util.utils import fliplr, Logger, save_checkpoint, visualize_ranked_results
 from util.eval_metrics import make_results
 from util.samplers import RandomIdentitySampler, AttrPool
 
@@ -89,8 +89,10 @@ def main(opt):
   use_gpu = torch.cuda.is_available()
   pin_memory = True if use_gpu else False
 
-  if args.mode == 'train': sys.stdout = Logger(osp.join(save_dir, 'log_train.txt'))
-  else: sys.stdout = Logger(osp.join(save_dir, 'log_test.txt'))
+  if args.mode == 'train': 
+    sys.stdout = Logger(osp.join(save_dir, 'log_train.txt'))
+  else: 
+    sys.stdout = Logger(osp.join(save_dir, 'log_test.txt'))
   print("==========\nArgs:{}\n==========".format(args))
 
   if use_gpu:
@@ -190,7 +192,9 @@ def train(epoch, G, D, target_net, criterionGAN, clf_criterion, metric_criterion
   is_training = True
 
   for batch_idx, (imgs, pids, _, pids_raw) in enumerate(trainloader):
-    if use_gpu: imgs, pids, pids_raw = imgs.cuda(), pids.cuda(), pids_raw.cuda()
+    if use_gpu: 
+      imgs, pids, pids_raw = imgs.cuda(), pids.cuda(), pids_raw.cuda()
+
     new_imgs, mask = perturb(imgs, G, D, train_or_test='train')
     new_imgs = new_imgs.cuda()
     mask = mask.cuda()
@@ -233,7 +237,7 @@ def train(epoch, G, D, target_net, criterionGAN, clf_criterion, metric_criterion
     if not args.use_SSIM == 0:
       from util.ms_ssim import msssim, ssim
       loss_func = msssim if args.use_SSIM == 2 else ssim
-      loss_G_ssim = (1-loss_func(imgs, new_imgs))*5
+      loss_G_ssim = (1-loss_func(imgs, new_imgs))*0.1
 
     ############## Forward ###############
     loss_D = (loss_D_fake + loss_D_real)/2
@@ -271,9 +275,7 @@ def test(G, D, target_net, dataset, queryloader, galleryloader, epoch, use_gpu, 
     if args.ak_type > 0:
       distmat, hits, ignore_list = make_results(new_qf, gf, new_lqf, lgf, q_pids, g_pids, q_camids, g_camids, args.targetmodel, args.ak_type, attr_matrix, args.dataset, attr_list)
       print("Hits rate, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}".format(ranks[0], hits[ranks[0]-1], ranks[1], hits[ranks[1]-1], ranks[2], hits[ranks[2]-1], ranks[3], hits[ranks[3]-1]))
-      if is_test:
-        if args.usevis: visualize_attr_results(distmat, ignore_list, dataset, save_dir=osp.join(vis_dir, 'attr_results'), topk=20)
-      else:
+      if not is_test:
         return hits
 
     else:
@@ -283,8 +285,10 @@ def test(G, D, target_net, dataset, queryloader, galleryloader, epoch, use_gpu, 
         print("Results ----------")
         print("Before, mAP: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}".format(mAP, ranks[0], cmc[ranks[0]-1], ranks[1], cmc[ranks[1]-1], ranks[2], cmc[ranks[2]-1], ranks[3], cmc[ranks[3]-1]))
         print("After , mAP: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}".format(new_mAP, ranks[0], new_cmc[ranks[0]-1], ranks[1], new_cmc[ranks[1]-1], ranks[2], new_cmc[ranks[2]-1], ranks[3], new_cmc[ranks[3]-1]))
-        # if args.usevis: visualize_ranked_results(distmat, dataset, save_dir=osp.join(vis_dir, 'origin_results'), topk=20)
-        # if args.usevis: visualize_ranked_results(new_distmat, dataset, save_dir=osp.join(vis_dir, 'polluted_results'), topk=20)
+        # if args.usevis: 
+        #   visualize_ranked_results(distmat, dataset, save_dir=osp.join(vis_dir, 'origin_results'), topk=20)
+        # if args.usevis: 
+        #   visualize_ranked_results(new_distmat, dataset, save_dir=osp.join(vis_dir, 'polluted_results'), topk=20)
       else:
         _, new_cmc, new_mAP = make_results(new_qf, gf, new_lqf, lgf, q_pids, g_pids, q_camids, g_camids, args.targetmodel, args.ak_type)
         print("mAP: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}, Rank-{}: {:.1%}".format(new_mAP, ranks[0], new_cmc[ranks[0]-1], ranks[1], new_cmc[ranks[1]-1], ranks[2], new_cmc[ranks[2]-1], ranks[3], new_cmc[ranks[3]-1]))
@@ -294,7 +298,8 @@ def extract_and_perturb(loader, G, D, target_net, use_gpu, query_or_gallery, is_
   f, lf, new_f, new_lf, l_pids, l_camids = [], [], [], [], [], []
   ave_mask, num = 0, 0
   for batch_idx, (imgs, pids, camids, pids_raw) in enumerate(loader):
-    if use_gpu: imgs = imgs.cuda()
+    if use_gpu: 
+      imgs = imgs.cuda()
     ls = extract(imgs, target_net)
     if len(ls) == 1: features = ls[0]
     if len(ls) == 2: 
@@ -320,7 +325,8 @@ def extract_and_perturb(loader, G, D, target_net, use_gpu, query_or_gallery, is_
       new_f.append(new_features.detach().data.cpu())
 
       ls = [imgs, new_imgs, delta, mask]
-      if is_test: save_img(ls, pids, camids, epoch, batch_idx)
+      if is_test: 
+        save_img(ls, pids, camids, epoch, batch_idx)
 
   f = torch.cat(f, 0)
   if not lf == []: lf = torch.cat(lf, 0)
@@ -330,9 +336,9 @@ def extract_and_perturb(loader, G, D, target_net, use_gpu, query_or_gallery, is_
   if query_or_gallery == 'gallery':
     return [f, lf, l_pids, l_camids]
   elif query_or_gallery == 'query':
-    print('Ave number of mask: {}'.format(ave_mask/num))
     new_f = torch.cat(new_f, 0)
-    if not new_lf == []: new_lf = torch.cat(new_lf, 0)
+    if not new_lf == []: 
+      new_lf = torch.cat(new_lf, 0)
     return [f, lf, new_f, new_lf, l_pids, l_camids]
 
 def extract(imgs, target_net):
@@ -345,25 +351,11 @@ def extract(imgs, target_net):
 
 def perturb(imgs, G, D, train_or_test='test'):
   n,c,h,w = imgs.size()
-  if 'Gauss' in args.ablation:
-    delta = np.reshape(np.random.normal(0, 1.0, (n,c,h,w)), (n,c,h,w))
-    delta = torch.from_numpy(delta).float().cuda()
-  elif 'Uniform' in args.ablation:
-    delta = np.reshape(np.random.uniform(-1, 0, (n,c,h,w)), (n,c,h,w))
-    delta = torch.from_numpy(delta).float().cuda()
-  else:
-    delta = G(imgs)
+  delta = G(imgs)
   delta = L_norm(delta, train_or_test)
   new_imgs = torch.add(imgs.cuda(), delta[0:imgs.size(0)].cuda())
 
-  if 'random' in args.ablation:
-    mask = np.zeros((n,1,h,w)).flatten()
-    index  = np.array(sample(mask, int(args.temperature)))
-    mask[np.in1d(mask, index)] = 1
-    mask = torch.from_numpy(np.reshape(mask, (n,1,h,w))).float().cuda()
-  else:
-    _, mask = D(torch.cat((imgs, new_imgs.detach()), 1))
-    # print(torch.sum(mask.item()))
+  _, mask = D(torch.cat((imgs, new_imgs.detach()), 1))
   delta = delta * mask
   new_imgs = torch.add(imgs.cuda(), delta[0:imgs.size(0)].cuda())
 
@@ -375,15 +367,12 @@ def perturb(imgs, G, D, train_or_test='test'):
     return new_imgs, delta, mask
 
 def L_norm(delta, mode='train'):
-  delta.data += 1 # now 0..2
-  delta.data *= 0.5 # now 0..1
+  delta.data += 1 
+  delta.data *= 0.5
 
-  # normalize image color channels
   for c in range(3):
     delta.data[:,c,:,:] = (delta.data[:,c,:,:] - Imagenet_mean[c]) / Imagenet_stddev[c]
 
-  # temperature each channel of each image in deltaIm according to inf norm
-  # do on a per image basis as the inf norm of each image could be different
   bs = args.train_batch if (mode == 'train') else args.test_batch
   for i in range(bs):
     # do per channel l_inf normalization

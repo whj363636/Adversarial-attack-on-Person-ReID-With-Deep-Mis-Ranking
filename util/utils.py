@@ -229,35 +229,6 @@ def visualize_ranked_results(distmat, dataset, save_dir, topk=20):
         if rank_idx > topk:
             break
 
-def visualize_attr_results(distmat, ignore_list, dataset, save_dir, topk=20):
-  num_q, num_g = distmat.shape
-
-  print("Visualizing top-{} hits in '{}' ...".format(topk, save_dir))
-  print("# query: {}. # gallery {}".format(num_q, num_g))
-  print("# invalid_query: {}.".format(len(ignore_list)))
-  
-  assert num_q == len(dataset.query)
-  assert num_q > len(ignore_list)
-  assert num_g == len(dataset.gallery)
-  
-  indices = np.argsort(distmat, axis=1)
-  mkdir_if_missing(save_dir)
-
-  for q_idx in range(num_q):
-    if q_idx in ignore_list: continue
-    qimg_path, qpid, qcamid, _ = dataset.query[q_idx]
-    qdir = osp.join(save_dir, 'query' + str(q_idx + 1).zfill(5))
-    mkdir_if_missing(qdir)
-    cp_img_to(qimg_path, qdir, rank=0, prefix='query')
-
-    rank_idx = 1
-    for g_idx in indices[q_idx,:]:
-      gimg_path, gpid, gcamid, _ = dataset.gallery[g_idx]
-      cp_img_to(gimg_path, qdir, rank=rank_idx, prefix='gallery')
-      rank_idx += 1
-      if rank_idx > topk:
-        break
-
 def cp_img_to(src, dst, rank, prefix):
     """
     - src: image path or tuple (for vidreid)

@@ -1,2 +1,121 @@
 # Adversarial-attack-on-Person-ReID-With-Deep-Mis-Ranking
- This is a pytorch implementation of the CVPR2020 paper: Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking
+This is the code for the CVPR'20 paper "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
+
+# Prerequisites
+* Python2 / Python3
+* Pytorch (0.4.1)
+* CUDA
+* numpy
+
+# Prepare data
+Create a directory to store reid datasets under this repo
+```bash
+mkdir data/
+```
+
+If you wanna store datasets in another directory, you need to specify `--root path_to_your/data` when running the training code. Please follow the instructions below to prepare each dataset. After that, you can simply do `-d the_dataset` when running the training code. 
+
+**Market1501** :
+1. Download dataset to `data/` from http://www.liangzheng.org/Project/project_reid.html.
+2. Extract dataset and rename to `market1501`. The data structure would look like:
+```
+market1501/
+    bounding_box_test/
+    bounding_box_train/
+    ...
+```
+3. Use `-d market1501` when running the training code.
+
+**CUHK03** [13]:
+1. Create a folder named `cuhk03/` under `data/`.
+2. Download dataset to `data/cuhk03/` from http://www.ee.cuhk.edu.hk/~xgwang/CUHK_identification.html and extract `cuhk03_release.zip`, so you will have `data/cuhk03/cuhk03_release`.
+3. Download new split [14] from [person-re-ranking](https://github.com/zhunzhong07/person-re-ranking/tree/master/evaluation/data/CUHK03). What you need are `cuhk03_new_protocol_config_detected.mat` and `cuhk03_new_protocol_config_labeled.mat`. Put these two mat files under `data/cuhk03`. Finally, the data structure would look like
+```
+cuhk03/
+    cuhk03_release/
+    cuhk03_new_protocol_config_detected.mat
+    cuhk03_new_protocol_config_labeled.mat
+    ...
+```
+4. Use `-d cuhk03` when running the training code. In default mode, we use new split (767/700). If you wanna use the original splits (1367/100) created by [13], specify `--cuhk03-classic-split`. As [13] computes CMC differently from Market1501, you might need to specify `--use-metric-cuhk03` for fair comparison with their method. In addition, we support both `labeled` and `detected` modes. The default mode loads `detected` images. Specify `--cuhk03-labeled` if you wanna train and test on `labeled` images.
+
+
+**DukeMTMC-reID** [16, 17]:
+1. Create a directory under `data/` called `dukemtmc-reid`.
+2. Download dataset `DukeMTMC-reID.zip` from https://github.com/layumi/DukeMTMC-reID_evaluation#download-dataset and put it to `data/dukemtmc-reid`. Extract the zip file, which leads to
+```
+dukemtmc-reid/
+    DukeMTMC-reid.zip # (you can delete this zip file, it is ok)
+    DukeMTMC-reid/ # this folder contains 8 files.
+```
+3. Use `-d dukemtmcreid` when running the training code.
+
+
+**MSMT17** [22]:
+1. Create a directory named `msmt17/` under `data/`.
+2. Download dataset `MSMT17_V1.tar.gz` to `data/msmt17/` from http://www.pkuvmc.com/publications/msmt17.html. Extract the file under the same folder, so you will have
+```
+msmt17/
+    MSMT17_V1.tar.gz # (do whatever you want with this .tar file)
+    MSMT17_V1/
+        train/
+        test/
+        list_train.txt
+        ... (totally six .txt files)
+```
+3. Use `-d msmt17` when running the training code.
+
+# Prepare pretrained ReID models
+1. Create a directory to store reid datasets under this repo
+```bash
+mkdir models/
+```
+2. Download the pretrained models or train the models from scratch by yourself offline.
+3. Create a directory named by the targeted model (like `AlignedReID/` or `HACNN/`, more examples please refer to `__init__.py` in `models/`) under `models/` and move the checkpoint of pretrained models to this directory.
+
+It is easy to test the robustness of any customized ReID models following the above steps. The extra thing you need to do is to add the structure of your own models to `models/` and `__init__.py` 
+
+# Train
+Take attacking AlignedReID trained on Market1501 as an example:
+
+```bash
+python train.py \
+  --targetmodel='aligned' \
+  --dataset='market1501'\
+  --mode='train' \
+  --loss='xent_htri' \
+  --ak_type=-1 \
+  --temperature=-1 \
+  --use_SSIM=0 \
+  --epoch=100
+```
+
+# Test
+Take attacking AlignedReID trained on Market1501 as an example:
+
+```bash
+python train.py \
+  --targetmodel='aligned' \
+  --dataset='market1501'\
+  --G_resume_dir='./logs/aligned/market1501/best_G.pth.tar' \
+  --mode='test' \
+  --loss='xent_htri' \
+  --ak_type=-1 \
+  --temperature=-1 \
+  --use_SSIM=0 \
+  --epoch=100
+```
+
+# Reference
+If you are interested in our work, please read and cite [our paper]( ).
+```
+
+```
+
+# Acknowledgements
+Thanks for the following excellent works:
+open-reid [code](https://github.com/Cysu/open-reid)
+AlignedReID [paper](https://www.sciencedirect.com/science/article/abs/pii/S0031320319302031?via%3Dihub#!) and [code](https://github.com/michuanhaohao/AlignedReID) by michuanhaohao
+Person_reID_baseline_pytorch [code](https://github.com/layumi/Person_reID_baseline_pytorch) by layumi
+LSRO [paper](https://arxiv.org/abs/1701.07717) and [code](https://github.com/layumi/Person-reID_GAN) by layumi
+HHL [paper](http://openaccess.thecvf.com/content_ECCV_2018/html/Zhun_Zhong_Generalizing_A_Person_ECCV_2018_paper.html) and [code](https://github.com/zhunzhong07/HHL) by zhunzhong07
