@@ -141,12 +141,12 @@ If you are interested in our work, please read and cite our paper.
 # Acknowledgements
 Thanks for the following excellent works:
 
-1. Open-reid [code](https://github.com/Cysu/open-reid)
+(1) Open-reid [code](https://github.com/Cysu/open-reid)
 
-2. AlignedReID [paper](https://www.sciencedirect.com/science/article/abs/pii/S0031320319302031?via%3Dihub#!) and [code](https://github.com/michuanhaohao/AlignedReID) by michuanhaohao
+(2) AlignedReID [paper](https://www.sciencedirect.com/science/article/abs/pii/S0031320319302031?via%3Dihub#!) and [code](https://github.com/michuanhaohao/AlignedReID) by michuanhaohao
 
-3. Person reID baseline[code](https://github.com/layumi/Person_reID_baseline_pytorch) by layumi
+(3) Person ReID baseline[code](https://github.com/layumi/Person_reID_baseline_pytorch) by layumi
 
-4. LSRO [paper](https://arxiv.org/abs/1701.07717) and [code](https://github.com/layumi/Person-reID_GAN) by layumi
+(4) LSRO [paper](https://arxiv.org/abs/1701.07717) and [code](https://github.com/layumi/Person-reID_GAN) by layumi
 
-5. HHL [paper](http://openaccess.thecvf.com/content_ECCV_2018/html/Zhun_Zhong_Generalizing_A_Person_ECCV_2018_paper.html) and [code](https://github.com/zhunzhong07/HHL) by zhunzhong07
+(5) HHL [paper](http://openaccess.thecvf.com/content_ECCV_2018/html/Zhun_Zhong_Generalizing_A_Person_ECCV_2018_paper.html) and [code](https://github.com/zhunzhong07/HHL) by zhunzhong07
