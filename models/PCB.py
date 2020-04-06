@@ -51,6 +51,10 @@ class ClassBlock(nn.Module):
         return x
 
 class PCB(nn.Module):
+  """
+  Based on
+  https://github.com/layumi/Person_reID_baseline_pytorch
+  """
   def __init__(self, num_classes):
     super(PCB, self).__init__()
 

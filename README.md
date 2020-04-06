@@ -1,5 +1,5 @@
 # Adversarial-attack-on-Person-ReID-With-Deep-Mis-Ranking
-This is the code for the CVPR'20 paper "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
+This is the code for the [CVPR'20 paper]() "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
 
 # Prerequisites
 * Python2 / Python3
@@ -16,6 +16,7 @@ mkdir data/
 If you wanna store datasets in another directory, you need to specify `--root path_to_your/data` when running the training code. Please follow the instructions below to prepare each dataset. After that, you can simply do `-d the_dataset` when running the training code. 
 
 **Market1501** :
+
 1. Download dataset to `data/` from http://www.liangzheng.org/Project/project_reid.html.
 2. Extract dataset and rename to `market1501`. The data structure would look like:
 ```
@@ -66,14 +67,39 @@ msmt17/
 3. Use `-d msmt17` when running the training code.
 
 # Prepare pretrained ReID models
-1. Create a directory to store reid datasets under this repo
+1. Create a directory to store reid pretrained models under this repo
 ```bash
 mkdir models/
 ```
-2. Download the pretrained models or train the models from scratch by yourself offline.
-3. Create a directory named by the targeted model (like `AlignedReID/` or `HACNN/`, more examples please refer to `__init__.py` in `models/`) under `models/` and move the checkpoint of pretrained models to this directory.
+2. Download the pretrained models or train the models from scratch by yourself offline
 
-It is easy to test the robustness of any customized ReID models following the above steps. The extra thing you need to do is to add the structure of your own models to `models/` and `__init__.py` 
+   2.1 Download Links
+
+   [IDE](https://drive.google.com/open?id=1hVYGcuhfwMs25QVdo2R-ugXW4WyAzuHF)
+
+   [AlignedReID](https://drive.google.com/open?id=1YZ7J85f1Fcjft7sh2rlPs1s0dlcaFpf-)
+
+   [PCB](https://drive.google.com/open?id=1xkA981JDESHxhGM_2N-ZdvboVXXzi3yd)
+
+   [Mudeep](https://drive.google.com/open?id=1g6HBt5uCVSbLQL1JUOY_jZZqYKtRmVsX)
+
+   [HACNN](https://drive.google.com/open?id=1ZxzY149vgagHzDUQLMuJqCpCSG3mtH3M)
+
+   [CamStyle](https://drive.google.com/open?id=11WsAyhme4p8i3lNehYpfdB0jZtSSOTzx)
+
+   [LSRO](https://drive.google.com/open?id=1cxeOJ3FU6qraHWU927HJC24E_MpXghP5)
+
+   [HHL](https://drive.google.com/open?id=1ZStrZ6qrB_kgcoB9BLXre81RiXtybBXD)
+
+   [SPGAN](https://drive.google.com/open?id=1YwnmBjfhBHlVQmTRn1ehaHRe5cXVGg5Z)
+
+   2.2 Training models from scratch (optional)
+
+   Create a directory named by the targeted model (like `aligned/` or `hacnn/`) following `__init__.py`under `models/` and move the checkpoint of pretrained models to this directory. Details of naming rules can refer to the download link.
+
+3. Customized ReID models (optional) 
+
+   It is easy to test the robustness of any customized ReID models following the above steps (1→2.2→3). The extra thing you need to do is to add the structure of your own models to `models/` and register it in`__init__.py` .
 
 # Train
 Take attacking AlignedReID trained on Market1501 as an example:
@@ -86,8 +112,8 @@ python train.py \
   --loss='xent_htri' \
   --ak_type=-1 \
   --temperature=-1 \
-  --use_SSIM=0 \
-  --epoch=100
+  --use_SSIM=2 \
+  --epoch=40
 ```
 
 # Test
@@ -102,12 +128,12 @@ python train.py \
   --loss='xent_htri' \
   --ak_type=-1 \
   --temperature=-1 \
-  --use_SSIM=0 \
-  --epoch=100
+  --use_SSIM=2 \
+  --epoch=40
 ```
 
 # Reference
-If you are interested in our work, please read and cite [our paper]( ).
+If you are interested in our work, please read and cite our paper.
 ```
 
 ```
