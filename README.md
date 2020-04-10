@@ -1,6 +1,13 @@
 # Adversarial-attack-on-Person-ReID-With-Deep-Mis-Ranking
 This is the code for the [CVPR'20 paper]() "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
 
+<p align="center">
+    <img src="images/framework.png" width="1200"\>
+</p>
+<p align="center">
+<b>Left figure:</b> The framework of our method. Our goal is to generate some noise $\mathcal{P}$ to disturb the input images $\mathcal{I}$. The disturbed images $\hat{\mathcal{I}}$ is able to cheat the ReID system $\mathcal{T}$ by attacking the visual similarities. <b>Right figure:</b> Specifically, the distance of each pair of samples from different categories (e.g., ($\hat{I}^k_c$, $I$), $\forall I\in\left\{I_{cd}\right\}$) is minimized, while the distance of each pair of the samples from the same category (e.g., ($\hat{I}^k_c$, $I$), $\forall I\in\left\{I_{cs}\right\}$) is maximized. The overall framework is trained by a generative adversarial network ($GAN$).
+</p>
+
 # Prerequisites
 * Python2 / Python3
 * Pytorch (0.4.1)
@@ -68,6 +75,7 @@ msmt17/
 
 # Prepare pretrained ReID models
 1. Create a directory to store reid pretrained models under this repo
+
 ```bash
 mkdir models/
 ```
@@ -132,7 +140,16 @@ python train.py \
   --epoch=40
 ```
 
+# Results
+
+<p align="center">
+    <img src="images/results.png" width="450"\>
+</p>
+<p align="center">
+</p>
+
 # Reference
+
 If you are interested in our work, please read and cite our paper.
 ```
 
