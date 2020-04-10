@@ -2,7 +2,7 @@
 This is the code for the [CVPR'20 paper]() "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
 
 <p align="center">
-    <img src="images/framework.png" width="1200"\>
+    <img src="images/framework.PNG" width="960"\>
 </p>
 
 # Prerequisites
@@ -140,7 +140,7 @@ python train.py \
 # Results
 
 <p align="center">
-    <img src="images/results.png" width="450"\>
+    <img src="images/results.PNG" width="450"\>
 </p>
 
 # Reference
