@@ -4,8 +4,6 @@ This is the code for the [CVPR'20 paper]() "Transferable, Controllable, and Inco
 <p align="center">
     <img src="images/framework.png" width="1200"\>
 </p>
-<p align="center">
-</p>
 
 # Prerequisites
 * Python2 / Python3
@@ -143,8 +141,6 @@ python train.py \
 
 <p align="center">
     <img src="images/results.png" width="450"\>
-</p>
-<p align="center">
 </p>
 
 # Reference
