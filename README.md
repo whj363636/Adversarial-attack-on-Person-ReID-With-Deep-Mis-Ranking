@@ -5,7 +5,6 @@ This is the code for the [CVPR'20 paper]() "Transferable, Controllable, and Inco
     <img src="images/framework.png" width="1200"\>
 </p>
 <p align="center">
-<b>Left figure:</b> The framework of our method. Our goal is to generate some noise $\mathcal{P}$ to disturb the input images $\mathcal{I}$. The disturbed images $\hat{\mathcal{I}}$ is able to cheat the ReID system $\mathcal{T}$ by attacking the visual similarities. <b>Right figure:</b> Specifically, the distance of each pair of samples from different categories (e.g., ($\hat{I}^k_c$, $I$), $\forall I\in\left\{I_{cd}\right\}$) is minimized, while the distance of each pair of the samples from the same category (e.g., ($\hat{I}^k_c$, $I$), $\forall I\in\left\{I_{cs}\right\}$) is maximized. The overall framework is trained by a generative adversarial network ($GAN$).
 </p>
 
 # Prerequisites
