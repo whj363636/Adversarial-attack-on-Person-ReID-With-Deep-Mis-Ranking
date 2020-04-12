@@ -1,5 +1,5 @@
 # Adversarial-attack-on-Person-ReID-With-Deep-Mis-Ranking
-This is the code for the [CVPR'20 paper]() "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
+This is the code for the [CVPR'20 paper](https://arxiv.org/abs/2004.04199) "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
 
 <p align="center">
     <img src="images/framework.PNG" width="960"\>
@@ -147,7 +147,14 @@ python train.py \
 
 If you are interested in our work, please read and cite our paper.
 ```
-
+@misc{wang2020transferable,
+    title={Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking},
+    author={Hongjun Wang and Guangrun Wang and Ya Li and Dongyu Zhang and Liang Lin},
+    year={2020},
+    eprint={2004.04199},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
 ```
 
 # Acknowledgements
