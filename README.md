@@ -44,8 +44,8 @@ cuhk03/
 ```
 4. Use `-d cuhk03` when running the training code. In default mode, we use new split (767/700). If you wanna use the original splits (1367/100) created by [13], specify `--cuhk03-classic-split`. As [13] computes CMC differently from Market1501, you might need to specify `--use-metric-cuhk03` for fair comparison with their method. In addition, we support both `labeled` and `detected` modes. The default mode loads `detected` images. Specify `--cuhk03-labeled` if you wanna train and test on `labeled` images.
 
-
 **DukeMTMC-reID** [16, 17]:
+
 1. Create a directory under `data/` called `dukemtmc-reid`.
 2. Download dataset `DukeMTMC-reID.zip` from https://github.com/layumi/DukeMTMC-reID_evaluation#download-dataset and put it to `data/dukemtmc-reid`. Extract the zip file, which leads to
 ```
@@ -142,6 +142,10 @@ python train.py \
 <p align="center">
     <img src="images/results.PNG" width="450"\>
 </p>
+# Reminders
+
+1. If you are using your *own* trained ReID models (no matter whether is customized), be careful about the name of variables and properly change or hold Line 38–53 in `__init__.py`.
+2. You may notice some arguments and codes involve the attribute information, if you are interested in that you can easily find and download the extra attribute files about Market1501 or DukeMTMC. We have conducted some related experiments about attribute attack but it is *not* the main content of this paper.
 
 # Reference
 
@@ -162,6 +166,6 @@ Thanks for the following excellent works:
 
 - Open-reid [code](https://github.com/Cysu/open-reid)
 - AlignedReID [paper](https://www.sciencedirect.com/science/article/abs/pii/S0031320319302031?via%3Dihub#!) and [code](https://github.com/michuanhaohao/AlignedReID) by michuanhaohao
-- Person ReID baseline[code](https://github.com/layumi/Person_reID_baseline_pytorch) by layumi
+- Person ReID baseline [code](https://github.com/layumi/Person_reID_baseline_pytorch) by layumi
 - LSRO [paper](https://arxiv.org/abs/1701.07717) and [code](https://github.com/layumi/Person-reID_GAN) by layumi
 - HHL [paper](http://openaccess.thecvf.com/content_ECCV_2018/html/Zhun_Zhong_Generalizing_A_Person_ECCV_2018_paper.html) and [code](https://github.com/zhunzhong07/HHL) by zhunzhong07

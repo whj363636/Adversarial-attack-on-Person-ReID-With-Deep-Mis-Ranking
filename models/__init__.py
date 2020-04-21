@@ -43,7 +43,8 @@ def init_model(name, pre_dir, *args, **kwargs):
     if k[:6] == 'module':
       change = True
       break
-  if not change: new_state_dict = state_dict
+  if not change: 
+    new_state_dict = state_dict
   else:
     from collections import OrderedDict
     new_state_dict = OrderedDict()
