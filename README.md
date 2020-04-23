@@ -9,9 +9,9 @@ This is the code for the [CVPR'20 paper](https://arxiv.org/abs/2004.04199) "Tran
 * Python2 / Python3
 * Pytorch (0.4.1)
 * CUDA
-* numpy
-* matplotlib
-* scipy
+* Numpy
+* Matplotlib
+* Scipy
 
 # Prepare data
 Create a directory to store reid datasets under this repo
