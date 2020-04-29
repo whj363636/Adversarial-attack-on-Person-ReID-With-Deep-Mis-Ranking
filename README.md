@@ -7,7 +7,7 @@ This is the code for the [CVPR'20 paper](https://arxiv.org/abs/2004.04199) "Tran
 
 # Prerequisites
 * Python2 / Python3
-* Pytorch (0.4.1)
+* Pytorch0.4.1 (do not test for >=Pytorch1.0)
 * CUDA
 * Numpy
 * Matplotlib
