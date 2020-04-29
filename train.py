@@ -20,7 +20,7 @@ import torch.backends.cudnn as cudnn
 
 import models
 from models.PCB import PCB_test
-from ReID_attr import get_target_withattr
+# from ReID_attr import get_target_withattr # Need Attribute file
 from opts import get_opts, Imagenet_mean, Imagenet_stddev
 from GD import Generator, MS_Discriminator, Pat_Discriminator, GANLoss, weights_init
 from advloss import DeepSupervision, adv_CrossEntropyLoss, adv_CrossEntropyLabelSmooth, adv_TripletLoss
@@ -381,7 +381,7 @@ def L_norm(delta, mode='train'):
         l_inf_channel = delta[i,ci,:,:].data.abs().max()
         # l_inf_channel = torch.norm(delta[i,ci,:,:]).data
         mag_in_scaled_c = args.mag_in/(255.0*Imagenet_stddev[ci])
-        delta[i,ci,:,:].data *= np.minimum(1.0, mag_in_scaled_c / l_inf_channel).float().cuda()
+        delta[i,ci,:,:].data *= np.minimum(1.0, mag_in_scaled_c / l_inf_channel.cpu()).float().cuda()
       except IndexError:
         break
   return delta

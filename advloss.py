@@ -61,7 +61,7 @@ class adv_CrossEntropyLabelSmooth(nn.Module):
     log_probs = self.logsoftmax(logits)
     adv_target = torch.zeros(log_probs.size()).scatter_(1, adv_target.unsqueeze(1).data.cpu(), 1)
     smooth = torch.ones(log_probs.size()) / (self.num_classes-1)
-    smooth[pids.data.cpu()] = 0
+    smooth[:, pids.data.cpu()] = 0 # Pytorch1.0
     smooth = smooth.cuda()
     if self.use_gpu: adv_target = adv_target.cuda()
     adv_target = (1 - self.epsilon) * adv_target + self.epsilon * smooth
