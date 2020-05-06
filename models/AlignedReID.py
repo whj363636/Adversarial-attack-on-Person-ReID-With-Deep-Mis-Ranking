@@ -8,12 +8,12 @@ import torchvision
 __all__ = ['ResNet50']
 
 class ResNet50(nn.Module):
-    """
-    Alignedreid: Surpassing human-level performance in person re-identification
-    
-    Reference:
-    Zhang, Xuan, et al. "Alignedreid: Surpassing human-level performance in person re-identification." arXiv preprint arXiv:1711.08184 (2017)
-    """
+  """
+  Alignedreid: Surpassing human-level performance in person re-identification
+
+  Reference:
+  Zhang, Xuan, et al. "Alignedreid: Surpassing human-level performance in person re-identification." arXiv preprint arXiv:1711.08184 (2017)
+  """
   def __init__(self, num_classes, **kwargs):
     super(ResNet50, self).__init__()
     self.loss = {'softmax', 'metric'}
@@ -49,19 +49,21 @@ class ResNet50(nn.Module):
     if self.loss == {'softmax'}:
       return [y]
     elif self.loss == {'metric'}:
-      if self.aligned: return [f, lf]
+      if self.aligned: 
+        return [f, lf]
       return [f]
     elif self.loss == {'softmax', 'metric'}:
-      if self.aligned: return [y, f, lf]
+      if self.aligned: 
+        return [y, f, lf]
       return [y, f]
     else:
       raise KeyError("Unsupported loss: {}".format(self.loss))
 
 class HorizontalMaxPool2d(nn.Module):
-    def __init__(self):
-        super(HorizontalMaxPool2d, self).__init__()
+  def __init__(self):
+    super(HorizontalMaxPool2d, self).__init__()
 
 
-    def forward(self, x):
-        inp_size = x.size()
-        return nn.functional.max_pool2d(input=x,kernel_size= (1, inp_size[3]))
+  def forward(self, x):
+    inp_size = x.size()
+    return nn.functional.max_pool2d(input=x,kernel_size= (1, inp_size[3]))
