@@ -9,7 +9,6 @@ import time
 import os.path as osp
 from PIL import Image
 import matplotlib
-import cv2
 import numpy as np
 from numpy import array, argmin
 
