@@ -1,6 +1,8 @@
 # Adversarial-attack-on-Person-ReID-With-Deep-Mis-Ranking
 This is the code for the [CVPR'20 paper](https://arxiv.org/abs/2004.04199) "Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking." by Hongjun Wang, Guangrun Wang, Ya Li, Dongyu Zhang, Liang Lin.
 
+**Looking for a PhD surpervior in 2021, my CV is already online https://whj363636.github.io/.**
+
 <p align="center">
     <img src="images/framework.PNG" width="960"\>
 </p>
