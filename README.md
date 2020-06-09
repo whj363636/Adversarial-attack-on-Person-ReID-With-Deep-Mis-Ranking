@@ -157,14 +157,13 @@ python train.py \
 
 If you are interested in our work, please read and cite our paper.
 ```
-@misc{wang2020transferable,
-    title={Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking},
-    author={Hongjun Wang and Guangrun Wang and Ya Li and Dongyu Zhang and Liang Lin},
-    year={2020},
-    eprint={2004.04199},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
+@InProceedings{Wang_2020_CVPR,
+author = {Wang, Hongjun and Wang, Guangrun and Li, Ya and Zhang, Dongyu and Lin, Liang},
+title = {Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking},
+booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
+} 
 ```
 
 # Acknowledgements
