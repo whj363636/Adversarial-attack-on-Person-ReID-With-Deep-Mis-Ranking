@@ -150,8 +150,8 @@ python train.py \
 
 # Reminders
 
-1. If you are using your *own* trained ReID models (no matter whether is customized), be careful about the name of variables and properly change or hold Line 38–53 in `__init__.py`.
-2. You may notice some arguments and codes involve the attribute information, if you are interested in that you can easily find and download the extra attribute files about Market1501 or DukeMTMC. We have conducted some related experiments about attribute attack but it is *not* the main content of this paper.
+1. If you are using your *own* trained ReID models (no matter whether they are customized), be careful about the name of variables and properly change or hold Line 38–53 in `__init__.py` (adaptation to early Pytorch0.3 trained models).
+2. You may notice some arguments and codes involve the attribute information, if you are interested in that you can easily find and download the extra attribute files about Market1501 or DukeMTMC. We have conducted some related experiments about attribute attack but it is *not* the main content of this paper so I delete that part of code.
 
 # Reference
 
