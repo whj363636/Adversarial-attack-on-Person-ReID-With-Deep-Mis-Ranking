@@ -51,7 +51,7 @@ parser.add_argument('--ak_type', type=int, default=-1, help='-1 if non-targeted,
 parser.add_argument('--attr_key', type=str, default='upwhite', help='[attribute, value]')
 parser.add_argument('--attr_value', type=int, default=2, help='[attribute, value]')
 parser.add_argument('--mag_in', type=float, default=16.0, help='l_inf magnitude of perturbation')
-parser.add_argument('--temperature', type=float, default=-1, help="temperature for D")
+parser.add_argument('--temperature', type=float, default=-1, help="tau in paper")
 parser.add_argument('--usegumbel', action='store_true', default=False, help='whether to use gumbel softmax')
 parser.add_argument('--use_SSIM', type=int, default=2, help="0: None, 1: SSIM, 2: MS-SSIM ")
 # Base

@@ -83,6 +83,8 @@ mkdir models/
    2.1 Download Links
 
    [IDE](https://drive.google.com/open?id=1hVYGcuhfwMs25QVdo2R-ugXW4WyAzuHF)
+   
+   [DenseNet121](https://drive.google.com/drive/folders/1XSiVo0lqULQJyYv4T2pt6uA4qtxKSb6X?usp=sharing)
 
    [AlignedReID](https://drive.google.com/open?id=1YZ7J85f1Fcjft7sh2rlPs1s0dlcaFpf-)
 
@@ -94,7 +96,7 @@ mkdir models/
 
    [CamStyle](https://drive.google.com/open?id=11WsAyhme4p8i3lNehYpfdB0jZtSSOTzx)
 
-   [LSRO](https://drive.google.com/open?id=1cxeOJ3FU6qraHWU927HJC24E_MpXghP5)
+   [LSRO](https://drive.google.com/drive/folders/1cxeOJ3FU6qraHWU927HWC24E_MpXghP5?usp=sharing)
 
    [HHL](https://drive.google.com/open?id=1ZStrZ6qrB_kgcoB9BLXre81RiXtybBXD)
 
@@ -148,21 +150,20 @@ python train.py \
 
 # Reminders
 
-1. If you are using your *own* trained ReID models (no matter whether is customized), be careful about the name of variables and properly change or hold Line 38–53 in `__init__.py`.
-2. You may notice some arguments and codes involve the attribute information, if you are interested in that you can easily find and download the extra attribute files about Market1501 or DukeMTMC. We have conducted some related experiments about attribute attack but it is *not* the main content of this paper.
+1. If you are using your *own* trained ReID models (no matter whether they are customized), be careful about the name of variables and properly change or hold Line 38–53 in `__init__.py` (adaptation to early Pytorch0.3 trained models).
+2. You may notice some arguments and codes involve the attribute information, if you are interested in that you can easily find and download the extra attribute files about Market1501 or DukeMTMC. We have conducted some related experiments about attribute attack but it is *not* the main content of this paper so I delete that part of code.
 
 # Reference
 
-If you are interested in our work, please read and cite our paper.
+If you are interested in our work, please consider citing our paper.
 ```
-@misc{wang2020transferable,
-    title={Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking},
-    author={Hongjun Wang and Guangrun Wang and Ya Li and Dongyu Zhang and Liang Lin},
-    year={2020},
-    eprint={2004.04199},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
+@InProceedings{Wang_2020_CVPR,
+author = {Wang, Hongjun and Wang, Guangrun and Li, Ya and Zhang, Dongyu and Lin, Liang},
+title = {Transferable, Controllable, and Inconspicuous Adversarial Attacks on Person Re-identification With Deep Mis-Ranking},
+booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
+} 
 ```
 
 # Acknowledgements
