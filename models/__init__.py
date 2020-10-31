@@ -36,7 +36,8 @@ def init_model(name, pre_dir, *args, **kwargs):
   print("Initializing model: {}".format(name))
   net = __factory[name](*args, **kwargs)
   # load pretrained model
-  checkpoint = torch.load(pre_dir)
+  checkpoint = torch.load(pre_dir) # for Python 2
+  # checkpoint = torch.load(pre_dir, encoding="latin1") # for Python 3
   state_dict = checkpoint['state_dict'] if isinstance(checkpoint, dict) and 'state_dict' in checkpoint else checkpoint
   change = False
   for k, v in state_dict.items():
