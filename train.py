@@ -260,7 +260,7 @@ def test(G, D, target_net, dataset, queryloader, galleryloader, epoch, use_gpu, 
   is_training = False
   if args.mode == 'test' and args.G_resume_dir:
     G_resume_dir, D_resume_dir = args.G_resume_dir, args.G_resume_dir.replace('G', 'D')
-    G_checkpoint, D_checkpoint = torch.load(G_resume_dir), torch.load(D_resume_dir)
+    G_checkpoint, D_checkpoint = torch.load(G_resume_dir, weights_only=True), torch.load(D_resume_dir, weights_only=True)
     G_state_dict = G_checkpoint['state_dict'] if isinstance(G_checkpoint, dict) and 'state_dict' in G_checkpoint else G_checkpoint
     D_state_dict = D_checkpoint['state_dict'] if isinstance(D_checkpoint, dict) and 'state_dict' in D_checkpoint else D_checkpoint
 
